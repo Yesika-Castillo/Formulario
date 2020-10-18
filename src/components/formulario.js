@@ -1,10 +1,13 @@
 import React, { Fragment, useState } from 'react'
+import { useFirestore } from 'reactfire'
 
 const Formulario = () => {
   const [datos, setDatos] = useState({
     nombre: '',
     apellido: '',
   })
+  const firestore = useFirestore()
+
   const handleInputChange = (event) => {
     //console.log(event.target.value)
     setDatos({
@@ -15,6 +18,19 @@ const Formulario = () => {
   const enviarDatos = (event) => {
     event.preventDefault()
     console.log({ datos })
+    enviarAFirebase()
+  }
+
+  const enviarAFirebase = () => {
+    firestore()
+      .collection('lista-clientes')
+      .add({ ...datos })
+      .then((quantityAfter) => {
+        console.log('the amount was saved successfully', quantityAfter)
+      })
+      .catch((error) => {
+        console.log('error', error)
+      })
   }
 
   return (
