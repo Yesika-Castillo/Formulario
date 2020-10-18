@@ -14,7 +14,7 @@ const Formulario = () => {
   }
   const enviarDatos = (event) => {
     event.preventDefault()
-    console.log(datos.nombre + '' + datos.apellido)
+    console.log({ datos })
   }
 
   return (
@@ -39,15 +39,43 @@ const Formulario = () => {
             onChange={handleInputChange}
           ></input>
         </div>
+        <input
+          type="date"
+          id="start"
+          name="fecha"
+          min="1900-1-1"
+          max="2020-12-31"
+          onChange={handleInputChange}
+        ></input>
+        <div className="col-md-3"></div>
+
+        <h3>
+          {datos.nombre} - {datos.apellido}
+        </h3>
+        <div>
+          <h6>Estado civil</h6>
+          <select name="estadoCivil" onChange={handleInputChange}>
+            <option value="casado">Casado</option>
+            <option value="casado">Soltero</option>
+            <option value="casado">Disponible</option>
+            <option value="casado">Complicado</option>
+          </select>
+          <h6>Fecha de nacimiento</h6>
+        </div>
         <div className="col-md-3">
+          <h6>Ingrese Correo</h6>
+          <input
+            placeholder="Alguien@.com"
+            className="form-control"
+            type="text"
+            name="correo"
+            onChange={handleInputChange}
+          ></input>
           <button className="btn btn-primary" type="submit">
             Enviar
           </button>
         </div>
       </form>
-      <h3>
-        {datos.nombre} - {datos.apellido}
-      </h3>
     </Fragment>
   )
 }
